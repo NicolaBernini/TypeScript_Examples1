@@ -1,7 +1,7 @@
-
-//declare module module_vector
-//{
-class Vector
+/**
+  * @brief It defines a Vector Class supporting some basic operations 
+  */
+export class Vector
 { 
     private data: number[]; 
     // NOTE: Constructor can not be overloaded (yet) so instead of overloading use factory methods
@@ -52,12 +52,36 @@ class Vector
         
         return res; 
     }
+
+    static sub(v1: Vector, v2: Vector) : Vector
+    { 
+        if (v1.size() != v2.size()) throw new Error("Sizes do not match"); 
+        let res = v1; 
+        for(var i = 0; i < v1.size(); ++i) res.put(i, v1.get(i)-v2.get(i));
+        
+        return res; 
+    }
+    
+    static dot(v1: Vector, v2: Vector) : number 
+    { 
+        if (v1.size() != v2.size()) throw new Error("Sizes do not match"); 
+        let res = 0; 
+        for(var i = 0; i < v1.size(); ++i) res += v1.get(i)*v2.get(i); 
+        
+        return res; 
+    }
+    
+    static scalar_prod(k: number, v1: Vector) : Vector 
+    { 
+        let res = v1; 
+        for(var i = 0; i < v1.size(); ++i) res.put(i, v1.get(i)*k); 
+        return res; 
+    }
 }
 
-//export { Vector }; 
-    
-//}
+/////// JS FIDDLE TEST ///////////
 
+/*
 let v1 = new Vector([1,2,3]); 
 let v2 = Vector.fromEmpty(); 
 
@@ -66,4 +90,4 @@ document.body.innerHTML += v1.to_str()+"<br/>";
 let v3 = Vector.sum(v1, v1); 
 
 document.body.innerHTML += v3.to_str()+"<br/>"; 
-
+*/
