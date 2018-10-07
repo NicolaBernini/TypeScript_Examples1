@@ -43,11 +43,15 @@ export class Vector
       * @note Used instead of Constructor Overloading (which is not supported in TS)
       */
     static fromEmpty() { return new this([]); }
+    static fromLength(n: number) 
+    {
+        var res = new Vector(new Array(n)); 
+    }
 
     static sum(v1: Vector, v2: Vector) : Vector
     { 
         if (v1.size() != v2.size()) throw new Error("Sizes do not match"); 
-        let res = v1; 
+        var res = new Vector(Array(v1.size())); 
         for(var i = 0; i < v1.size(); ++i) res.put(i, v1.get(i)+v2.get(i));
         
         return res; 
@@ -56,7 +60,7 @@ export class Vector
     static sub(v1: Vector, v2: Vector) : Vector
     { 
         if (v1.size() != v2.size()) throw new Error("Sizes do not match"); 
-        let res = v1; 
+        var res = new Vector(Array(v1.size())); 
         for(var i = 0; i < v1.size(); ++i) res.put(i, v1.get(i)-v2.get(i));
         
         return res; 
@@ -73,7 +77,7 @@ export class Vector
     
     static scalar_prod(k: number, v1: Vector) : Vector 
     { 
-        let res = v1; 
+        var res = new Vector(Array(v1.size())); 
         for(var i = 0; i < v1.size(); ++i) res.put(i, v1.get(i)*k); 
         return res; 
     }
